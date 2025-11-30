@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HANDLOOM STORE</title>
+<meta charset="utf-8" />
+<style>
+  body { font-family: Arial; margin: 0; background: #f4f4f4; }
+  header { background: orangered; color: white; padding: 15px; text-align: center; }
+  #search { width: 60%; padding: 8px; border-radius: 5px; border: none; }
+  nav { text-align: center; background:#fff; padding:10px; position:sticky; top:0; z-index:2; }
+  nav button { margin:5px; background:#333;color:#fff;padding:8px 12px;border:none;
+               border-radius:5px; cursor:pointer; }
+  .banner { width: 100%; height: 200px; object-fit: cover; display:block; }
+  .container { display:flex; gap:20px; align-items:flex-start; padding:15px; }
+  .grid { display: grid; grid-template-columns: repeat(4,1fr); gap:15px; flex:1; }
+  .product { background:#fff; border-radius:8px; padding:10px; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  img { width:100%; height:200px; object-fit:cover; border-radius:5px; }
+  select, input.qty, button.add { width:90%; padding:7px; margin-top:5px; border-radius:5px; }
+  select.size { height:36px; }
+  select.qty { height:36px; }
+  button.add { background:orange; color:#fff; border:none; cursor:pointer; }
+  .cartWrap { width:320px; min-width:260px; }
+  .cart { background:white; padding:10px; margin-bottom:15px; border:2px solid #333; border-radius:8px; }
+  .pay { background:#007f00; color:#fff; width:100%; padding:10px; cursor:pointer; border:none; border-radius:6px; margin-top:8px; }
+  .cartItem { border-bottom:1px dashed #ddd; padding:6px 0; text-align:left; }
+  .cartItem:last-child { border-bottom:none; }
+  .removeBtn { background:#c00; color:#fff; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; float:right; }
+  #feedbackSection { margin-top:20px; } /* placeholder for feedback form (after cart) */
+  @media (max-width:1000px){
+    .grid{ grid-template-columns: repeat(2,1fr); }
+    .container{ flex-direction:column; }
+    .cartWrap{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h2><b>HANDLOOM STORE</b></h2>
+  <input id="search" type="text" placeholder="Search handloom products..." onkeyup="filterProducts()">
+</header>
+
+<!-- Category index / buttons -->
+<nav>
+  <button onclick="filterCategory('all')">All</button>
+  <button onclick="filterCategory('Silk Saree')">Silk Saree</button>
+  <button onclick="filterCategory('Handloom Kurta')">Handloom Kurta</button>
+  <button onclick="filterCategory('Wool Shawl')">Wool Shawl</button>
+  <button onclick="filterCategory('Ikat Dupatta')">Ikat Dupatta</button>
+  <button onclick="filterCategory('Bedsheet')">Bedsheet</button>
+  <button onclick="filterCategory('Cushion Cover')">Cushion Cover</button>
+  <button onclick="filterCategory('Banarasi Saree')">Banarasi Saree</button>
+  <button onclick="filterCategory('Cotton Kurti')">Cotton Kurti</button>
+  <button onclick="filterCategory('Ikat Saree')">Ikat Saree</button>
+  <button onclick="filterCategory('Pattu Saree')">Pattu Saree</button>
+  <button onclick="filterCategory('Handloom Bag')">Handloom Bag</button>
+  <button onclick="filterCategory('Curtains')">Curtains</button>
+</nav>
+
+<img class="banner" src="https://i.ibb.co/Tk9hVz3/handloom-banner.jpg" alt="Handloom banner">
+
+<div class="container">
+  <div class="grid" id="productList">
+
+  <!-- Products: converted to include size and qty selectors; values preserved from original -->
+
+  <!-- Silk Saree group (as original order) -->
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.bLTTZxY-saZaEJg8td1spAHaJL?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Silk Saree<br>₹9,000</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',9000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.xXWgt5CvP1Zkmtkj_x_h_wHaJ4?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Silk Saree<br>₹10,000</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://1.bp.blogspot.com/-2olkY-OYM1E/WVI9iEo1d7I/AAAAAAAACbU/OLyC555oS_w3Uh2Sj6h66O-uFgbYp_I7wCLcBGAs/s1600/unm19960_1.jpg.jpg" alt="">
+    <p>Silk Saree<br>₹9,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',9500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://tse4.mm.bing.net/th/id/OIF.Eam0v1263a6hqfPmywteug?pid=Api&P=0&w=300&h=300.jpg" alt="">
+    <p>Silk Saree<br>₹10,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://i.etsystatic.com/19614853/r/il/df818c/5502839072/il_1080xN.5502839072_huxn.jpg" alt="">
+    <p>Silk Saree<br>₹10,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://www.kollybollyethnics.com/image/catalog/data/05Mar2018/Purple-color-weaving-silk-double-blouse-saree-36006.jpg" alt="">
+    <p>Silk Saree<br>₹10,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://sunasa.in/cdn/shop/products/Maharashtrian-bride-in-red-Paithani-saree.jpg?v=1678445721.jpg" alt="">
+    <p>Silk Saree<br>₹10,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Silk Saree" data-category="Silk Saree">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.P6Wkx0XRcxo9lnKvcwyzugHaJ4?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Silk Saree<br>₹10,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Silk Saree',10500,this)">Add to Cart</button>
+  </div>
+
+
+  <!-- Handloom Kurta -->
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.M8qsHAh9MBzHwwpFu43MAQHaJ4?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Kurta<br>₹1,900</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',1900,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://static3.azafashions.com/uploads/product_gallery/2792-1_-0856574001571380503.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,900</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2900,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.pinimg.com/originals/0f/6b/20/0f6b20500aa6cac45107421dc5546c72.jpg" alt="">
+    <p>Handloom Kurta<br>₹3,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',3000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://5.imimg.com/data5/GF/LR/MY-14668042/kurthas-500x500.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.etsystatic.com/23727656/r/il/1b7014/2492395980/il_fullxfull.2492395980_tjbx.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://tipsandbeauty.com/wp-content/uploads/2019/08/Linen-Pathani-Kurta-for-Men.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+ <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.pinimg.com/originals/30/91/4f/30914f6b3d44a5919f826cffafc7eeff.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.pinimg.com/originals/90/40/79/904079673ede8a74df5cc98028021e96.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.pinimg.com/originals/1a/15/bd/1a15bd899740b1b63989470f787c9b11.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://i.pinimg.com/736x/dd/bf/36/ddbf3664f3b2f3fd16ec11ad6021fb1b.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Handloom Kurta" data-category="Handloom Kurta">
+    <img src="https://tse3.mm.bing.net/th/id/OIP._c5eDwNUlRmDO8JnLpdMYAHaLT?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Kurta<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Handloom Kurta',2000,this)">Add to Cart</button>
+  </div>
+  <!-- Wool Shawl -->
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://i.etsystatic.com/14906727/r/il/deef99/5553455360/il_1080xN.5553455360_6ldd.jpg" alt="">
+    <p>Wool Shawl<br>₹1,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://himalayankraft.in/wp-content/uploads/2023/09/HimalayanKraft-Pure-Wool-Kullu-Handloom-Shawl-2-370x370.jpg" alt="">
+    <p>Wool Shawl<br>₹1,300</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1300,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.T4gGm8WI89HS99rRTQqxbwHaHa?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Wool Shawl<br>₹1,800</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1800,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://himalayankraft.in/wp-content/uploads/2018/12/HK-SHAWLS-DB-43-scaled.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+
+   <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://himalayankraft.in/wp-content/uploads/2018/10/HK-Shawl-HB-17-2-444x444.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://i.pinimg.com/originals/1d/18/97/1d1897d3ac311964eefffa3a2c9e757d.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://cdn.exoticindia.com/images/products/original/shawls-2016/swn79.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://5.imimg.com/data5/XV/HM/MY-5725108/embroidered-kashmiri-shawl-500x500.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+  
+  <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://himalayankraft.in/wp-content/uploads/2018/12/HK-SHAWLS-DB-16-3-300x300.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Wool Shawl" data-category="Wool Shawl">
+    <img src="https://i.pinimg.com/736x/8a/39/27/8a392798e0cb5b3f9ea3c929f1b08745.jpg" alt="">
+    <p>Wool Shawl<br>₹1,600</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Wool Shawl',1600,this)">Add to Cart</button>
+  </div>
+  
+
+  <!-- Ikat Dupatta -->
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://www.luxurionworld.com/cdn/shop/products/blue-and-red-handloom-ikat-pure-silk-dupatta-573846.jpg?v=1673066737&width=533.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,000</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://m.media-amazon.com/images/I/61deBofJ+2L.UL1500.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://www.luxurionworld.com/cdn/shop/products/ID1P3SG324010402_Blue_Patola_Silk_Dupatta.jpg?v=1704367160&width=720.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.VwBMOn2PEY2nFeAzk-z7kgHaI4?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2025/1/478048447/ED/YT/JJ/24064455/prod-20250103-0604013842251730732794752-jpg-500x500.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://2.bp.blogspot.com/-MJ4-40ucKz8/WcZS6tAAp5I/AAAAAAAACYE/rtwKBRYbtxUyeSCNu6ZhjBMQo1FhdaChwCLcBGAs/s1600/uds931.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://5.imimg.com/data5/PL/FS/MY-10611839/handloom-pochampally-cotton-ikkat-dupatta-500x500.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://d1311wbk6unapo.cloudfront.net/NushopCatalogue/tr:f-webp,w-600,fo-auto/New_Launch__Molisha_Handloom_Cotton_Kurta_Pant_and_Khadi_Silk_Ikkat_Print_Dupatta_Set_26Z8GT4YUB_2024-07-15_1.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+
+
+  </div>
+   <div class="product" data-name="Ikat Dupatta" data-category="Ikat Dupatta">
+    <img src="https://5.imimg.com/data5/FF/WW/MY-17891763/handloom-ikkat-pure-silk-dupatta-1000x1000.jpg" alt="">
+    <p>Ikat Dupatta<br>₹1,200</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>
+    <button class="add" onclick="addToCart('Ikat Dupatta',1200,this)">Add to Cart</button>
+  </div>
+
+
+  <!-- Bedsheets -->
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.0wNKgpo9vu9A2NsSj9EzxQHaFj?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹3,000</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',3000,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://4.imimg.com/data4/KM/AJ/MY-9610074/165-500x500.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹3,000</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',3000,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://m.media-amazon.com/images/I/81FcabQUHfL.SL1500.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹3,000</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',3000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2021/1/AO/WO/FA/54542290/40554scattered-triangle-printed-blue-cotton-bedsheet-with-two-pilow-cover-swwv0062-1-500x500.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹4,000</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',4000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2024/1/378478227/DA/JO/AV/28771517/designer-cotton-double-bed-sheet-handloom-500x500.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,800</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2800,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://4.imimg.com/data4/LR/JB/MY-9610074/69-1000x1000.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,999</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2999,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://m.media-amazon.com/images/I/71cXXXUl4XL.SL1280.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,999</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2999,this)">Add to Cart</button>
+  </div>
+
+  
+  
+   <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://m.media-amazon.com/images/I/81mgqoOn7dL.SL1280.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,999</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://m.media-amazon.com/images/I/71gbDSaMiFL.SL1280.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,999</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2999,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Bedsheet" data-category="Bedsheet">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.6IQ0o5Zi6joH-tIYEz2aqQAAAA?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Bedsheet<br>₹2,999</p>
+    <select class="size"><option>Single</option><option>Double</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Handloom Bedsheet',2999,this)">Add to Cart</button>
+  </div>
+
+  <!-- Cushion Covers -->
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://tse4.mm.bing.net/th/id/OIP.awS-7xwiiERKShGUd5mQggHaE7?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Cushion Cover Set<br>₹1,000</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',1000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://www.azilaa.com/pics/Pink-and-blue-handloom-handmade-2-cushion-covers-42806_1_full.jpg" alt="">
+    <p>Cushion Cover Set<br>₹899</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',899,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.0kd7r8o0rYba0xjd-wq1NQHaHa?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.vO9odX37BKyDqiuzrQeVdAHaEt?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2022/1/BO/RD/FP/8985849/phulkari-cushion-cover-500x500.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2022/10/RO/IE/LK/19050085/product-jpeg-500x500.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2023/5/311612293/SU/LS/PF/81634429/whatsapp-image-2023-05-03-at-10-40-53-am-500x500.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://i.pinimg.com/originals/f4/d2/dd/f4d2ddfd6c9896eca5d38d09b8c4e57b.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://4.imimg.com/data4/SX/DD/MY-2414064/printed-cushion-covers-1000x1000.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://www.azilaa.com/pics/Aztec-style-bright-green-handloom-handmade-cushion-cover-1-43102_2_3.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cushion Cover" data-category="Cushion Cover">
+    <img src="https://nestasia.in/cdn/shop/products/DSCF7191_600x.jpg?v=1677925316.jpg" alt="">
+    <p>Cushion Cover Set<br>₹999</p>
+    <select class="size"><option>16×16</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Cushion Cover Set',999,this)">Add to Cart</button>
+  </div>
+  
+  
+
+  <!-- Banarasi Saree -->
+  <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://i.pinimg.com/originals/fa/c2/b3/fac2b3fa632a456a2e1f2ef63ff0ab0d.jpg" alt="">
+    <p>Banarasi Saree<br>₹11,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',11500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://www.luxurionworld.com/cdn/shop/products/IS1B122030803_Purple_Handloom_Banarasi_Silk_Saree_3.jpg?v=1689594803&width=1445.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="http://www.bunkala.com/cdn/shop/files/BKBS-02452_Multicolor_Rangkat_Kadwa_Banarasi_Pure_Katan_Silk_Handloom_Saree.jpg?v=1727885301.jpg" alt="">
+    <p>Banarasi Saree<br>₹13,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',13500,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://i.pinimg.com/736x/9d/b5/4e/9db54e5685859ddf578c0e963295e455.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.b8EWT2-TFbewc9gpOMWHBAHaHa?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+  </div>
+
+   <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://thecraftsbanaras.com/cdn/shop/products/image_82d5cc41-f2cf-43aa-a824-38b8a79363ed.jpg?v=1678372141.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+  </div>
+    <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj1N4v53b1wx8MRsWh0D0_xsJKAxptcrKGT0Ri3DFp_2l0ZUeS0CrGn8R491U8KW-j6_8os3-e4eDRZbbasFSJWHa3KDHWfnbkIx0ydqxaRithrboxHl4iw1DVcqXhPQgE5OKNlJdx7AhrM/s1600/1998c483-54cf-440c-866c-81e674068cef.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://www.loomfolks.com/wp-content/uploads/2020/12/Gorgeous-Black-Linen-Handloom-Saree-with-Banarasi-Design1.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+    </div>
+    <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://static3.azafashions.com/uploads/product/1685096465706_1.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+    </div>
+    <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.sYFaGANT_pK0w7ctWLKHRgHaJ3?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+    </div>
+    <div class="product" data-name="Banarasi Saree" data-category="Banarasi Saree">
+    <img src="https://assets2.andaazfashion.com/media/catalog/product/cache/1/image/a12781a7f2ccb3d663f7fd01e1bd2e4e/b/a/banarasi-silk-magenta-pink-saree-sarv148668-1.jpg" alt="">
+    <p>Banarasi Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Banarasi Saree',12500,this)">Add to Cart</button>
+    </div>
+
+  <!-- Cotton Kurti -->
+  <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://www.nityanx.com/images/product/sub_images/2025/11/IMG-20251127-WA0206-0-2025-11-27_15_00_59.jpg" alt="">
+    <p>Cotton Kurti<br>₹1,400</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',1400,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.97yzfq7TVNWzeshFGfLokgHaHa?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Cotton Kurti<br>₹1,800</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',1800,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://cdn.shopaccino.com/tacfab/images/cotton-suit-with-jacquard-work-mini4-541431.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://i.pinimg.com/originals/77/e3/f2/77e3f2e87497a0204009ed2a5fdd9d58.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+
+   <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.-83pn6e_7vPiaCrDFLC3jwHaLH?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+
+    <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://i.etsystatic.com/27404661/r/il/3024ec/2874149089/il_fullxfull.2874149089_i5i0.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+  
+    <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://i.etsystatic.com/30542255/r/il/3a1daf/4748616059/il_1080xN.4748616059_f26y.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Cotton Kurti" data-category="Cotton Kurti">
+    <img src="https://assets0.mirraw.com/images/7372688/image_zoom.jpeg?1568107391.jpg" alt="">
+    <p>Cotton Kurti<br>₹2,000</p>
+    <select class="size"><option>S</option><option>M</option><option>L</option><option>XL</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Cotton Kurti',2000,this)">Add to Cart</button>
+  </div>
+
+    <!-- Pattu Saree -->
+ <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://i.pinimg.com/736x/92/02/19/92021962e7d47c5f1f8d970b3520f889.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://vannamayil.com/cdn/shop/files/pure-venkatagiri-handloom-pattu-saree-V04628_5.jpg?v=1719317515&width=1445.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.yy6HWWXJW-JOvd_aAWgo-QHaJn?pid=Api&P=0&h=180" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.GiRroX4W4vUYs59AiYW7PAHaJ4?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://i.pinimg.com/736x/89/62/4e/89624e7e74db8bf30630f427b9e23c8d.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="http://vannamayil.com/cdn/shop/files/pure-venkatagiri-handloom-pattu-saree-V04635_3.jpg?v=1719318228.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2023/10/355688937/LI/XK/TB/8604398/product-jpeg-500x500.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://vannamayil.com/cdn/shop/files/pure-venkatagiri-handloom-pattu-saree-V04625_1.jpg?v=1719317241.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="http://5.imimg.com/data5/ANDROID/Default/2021/8/IP/BG/TD/101701239/product-jpeg-1000x1000.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://i.pinimg.com/originals/59/07/08/59070870c7bd1896c62dc10212fae7c8.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+   <div class="product" data-name="Pattu Saree" data-category="Pattu Saree">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2024/1/381006798/SE/QB/WF/210750576/handloom-silk-sarees-250x250.jpg" alt="">
+    <p>Pattu Saree<br>₹12,500</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option></select>
+    <button class="add" onclick="addToCart('Pattu Saree',12500,this)">Add to Cart</button>
+  </div>
+
+
+  <!-- Handloom bags -->
+   <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://www.fashionlady.in/wp-content/uploads/2016/04/handloom-handbags.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://www.shutterstock.com/image-photo/vivid-color-handloom-leather-textile-260nw-2323485263.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2023/5/311632813/OR/ON/MC/76715725/product-jpeg-500x500.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="http://www.seamsunbranded.com/cdn/shop/files/Everydayhandloombag_grande.jpg?v=1712822908.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://5.imimg.com/data5/OZ/FS/NZ/SELLER-71881508/cotton-sling-bag-500x500.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://tse2.mm.bing.net/th/id/OIP.Z3YsFTnV3ey_Bu8RJ98YngAAAA?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://5.imimg.com/data5/ANDROID/Default/2023/6/313189469/QL/LT/ZS/76715725/product-jpeg-500x500.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://4.imimg.com/data4/EX/YP/MY-25192010/handloom-shoulder-bag-500x500.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Bag" data-category="Handloom Bag">
+    <img src="https://i.pinimg.com/originals/62/1a/02/621a0249df095d3f431426e3515e87a8.jpg" alt="">
+    <p>Handloom Bag<br>₹850</p>
+    <select class="size"><option>Standard</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Bag',850,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2021/7/XA/ZZ/AH/3415805/handloom-curtain-1000x1000.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://5.imimg.com/data5/RV/QP/MY-10817233/handloom-door-curtain-250x250.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://tse3.mm.bing.net/th/id/OIP.6Mya2cioKSzTQkoBRXwaYAHaKu?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://m.media-amazon.com/images/I/71synS9q6yL.SL1024.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://m.media-amazon.com/images/I/91VuatvnaWL.SL1500.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2022/11/AQ/QP/PP/123623555/2-kolaveri-1-plain-mrn-mv-1000x1000.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div><div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2022/7/LC/MA/VQ/105548619/curtains-velvet-cloud-gold-500x500.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div>v<div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://5.imimg.com/data5/SELLER/Default/2022/11/HX/UE/IE/123623555/2-kolaveri-1-plain-mv-500x500.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Handloom Curtains" data-category="Curtains">
+    <img src="https://4.imimg.com/data4/DQ/NL/MY-7926578/fancy-curtains-500x500.jpg" alt="">
+    <p>Handloom Curtains<br>₹1,200</p>
+    <select class="size"><option>4x7 ft</option><option>4x9 ft</option></select>
+    <select class="qty"><option>1</option><option>2</option><option>3</option><option>4</option></select>
+    <button class="add" onclick="addToCart('Handloom Curtains',1200,this)">Add to Cart</button>
+  </div>
+  <!-- Ikat Saree  -->
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://www.gitagged.com/wp-content/uploads/2024/04/OIKAT-002-P15-SAR-01-6.jpg" alt="">
+    <p>Ikat Saree<br>₹9,800</p>
+    <select class="size"><option>Free Size</option></select>
+    <select class="qty"><option>1</option><option>2</option></select>
+    <button class="add" onclick="addToCart('Ikat Saree',9800,this)">Add to Cart</button>
+  </div>
+
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://www.luxurionworld.com/cdn/shop/products/PS1I1RP223080407_Green_Handloom_Ikat_Pure_Silk_Saree.jpg?v=1691147794.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://cdn.exoticindia.com/images/products/original/textiles-2019/gai934.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button>class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://goswadeshi.in/cdn/shop/files/gcpochslsa0841__3.jpg?v=1742537125&width=900.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://prithas.in/wp-content/uploads/2018/04/IKCEV02001.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://m.media-amazon.com/images/I/812L37GeocL.SL1500.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://i.pinimg.com/736x/6e/ef/87/6eef875e70d8969e1f3b930b5d5f3a3b.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button>class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://tse1.mm.bing.net/th/id/OIP.9I5HNebJtnpgI-77cCTwVAHaLH?pid=Api&P=0&h=180.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://m.media-amazon.com/images/I/81Zoj9LmLBL._UL1500_https://cdn.shopaccino.com/nirguna/products/tri3dnirgun11silkset299sowmyasrisitting2023-4-20-18-11-41600x2400-629504_l.jpg?v=503?param=4.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select>class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+  <div class="product" data-name="Ikat Saree" data-category="Ikat Saree">
+    <img src="https://assets.myntassets.com/assets/images/30014232/2024/6/21/0c1165a0-5f6a-40b9-934c-ad2f61a2c2291718991636419ADITRIPureCottonIkatSaree2.jpg" alt="">
+    <p>Ikat Saree<br>₹9,899</p>
+    <select> class="size"><option>Free Size</option></select>
+    <select> class="qty"><option>1</option><option>2</option></select>
+    <button> class="add" onclick="addToCart('Ikat Saree',9899,this)">Add to Cart</button>
+  </div>
+
+
+  
+
+
+
+
+  <!-- End of this chunk of products in PART-1 -->
+  </div> <!-- end grid -->
+
+  <!-- Cart column (right) -->
+  <div class="cartWrap">
+    <div class="cart">
+      <h3>Your Cart</h3>
+      <div id="items">No items yet</div>
+      <p>Total: ₹<span id="total">0</span></p>
+      <button class="pay" onclick="payNow()">Pay Now</button>
+    </div>
+
+    <!-- Feedback placeholder (will be replaced with form in PART-4) -->
+    <div id="feedbackSection">
+      <!-- Feedback will appear HERE after cart (you selected B) -->
+    </div>
+  </div>
+
+</div> <!-- end container -->
+
+<script>
+  /* Simple cart implementation that works with all parts.
+     Later parts may add more features (persist, remove, edit).
+  */
+  let cart = [];
+  let cartTotal = 0;
+
+  function addToCart(name, price, btn) {
+    // locate product card
+    const card = btn.closest('.product');
+    // size and qty selectors
+    const sizeEl = card.querySelector('.size');
+    const qtyEl = card.querySelector('.qty');
+
+    const size = sizeEl ? sizeEl.value : 'Free Size';
+    const qty = qtyEl ? parseInt(qtyEl.value) : 1;
+
+    const lineTotal = price * qty;
+
+    cart.push({ name, price, size, qty, lineTotal });
+    cartTotal += lineTotal;
+    renderCart();
+  }
+
+  function renderCart() {
+    const itemsDiv = document.getElementById('items');
+    if(cart.length === 0) {
+      itemsDiv.innerHTML = 'No items yet';
+      document.getElementById('total').textContent = '0';
+      return;
+    }
+    let html = '';
+    cart.forEach((it, idx) => {
+      html += `<div class="cartItem">
+                <strong>${it.name}</strong> (${it.size}) x${it.qty}
+                <button class="removeBtn" onclick="removeItem(${idx})">Remove</button>
+                <div>₹${it.lineTotal}</div>
+               </div>`;
+    });
+    itemsDiv.innerHTML = html;
+    document.getElementById('total').textContent = cartTotal;
+  }
+
+  function removeItem(index) {
+    if(index >=0 && index < cart.length) {
+      cartTotal -= cart[index].lineTotal;
+      cart.splice(index,1);
+      renderCart();
+    }
+  }
+
+  function payNow() {
+    if(cart.length === 0) {
+      alert('Cart is empty!');
+      return;
+    }
+    alert('Payment Successful!\\nAmount Paid: ₹' + cartTotal + '\\nThank you for shopping!');
+    // clear cart
+    cart = [];
+    cartTotal = 0;
+    renderCart();
+    // feedback form will be shown in PART-4 (placeholder present)
+  }
+
+  // Filtering by category
+  function filterCategory(cat) {
+    const products = document.querySelectorAll('.product');
+    products.forEach(p => {
+      if(cat === 'all') {
+        p.style.display = '';
+      } else {
+        if(p.getAttribute('data-category') === cat) p.style.display = '';
+        else p.style.display = 'none';
+      }
+    });
+  }
+
+  // Search box filtering (searches data-name and visible category)
+  function filterProducts() {
+    const q = document.getElementById('search').value.toLowerCase();
+    document.querySelectorAll('.product').forEach(p => {
+      const name = (p.getAttribute('data-name') || '').toLowerCase();
+      const catMatch = name.includes(q);
+      const titleMatch = p.querySelector('p') && p.querySelector('p').innerText.toLowerCase().includes(q);
+      if(q === '' || catMatch || titleMatch) p.style.display = '';
+      else p.style.display = 'none';
+    });
+  }
+
+  // Initialize cart UI
+  renderCart();
+</script>
+
+</body>
+</html>
